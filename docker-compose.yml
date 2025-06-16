@@ -1,0 +1,12 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydb
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
