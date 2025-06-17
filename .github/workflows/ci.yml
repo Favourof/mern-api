@@ -11,6 +11,23 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
       - run: npm install
       - run: npm test
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: azure/docker-login@v1
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - run: |
+  #         docker build -t ${{ secrets.DOCKER_USERNAME }}/mern-api:latest .
+  #         docker push ${{ secrets.DOCKER_USERNAME }}/mern-api:latest
+  #     - uses: azure/webapps-deploy@v2
+  #       with:
+  #         app-name: mern-api-rg
+  #         images: ${{ secrets.DOCKER_USERNAME }}/mern-api:latest
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
